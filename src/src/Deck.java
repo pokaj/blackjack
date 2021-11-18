@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private List<Card> cards = Arrays.asList(
+    private final List<Card> cards = Arrays.asList(
             // DIAMONDS
             new Card(Suit.DIAMONDS, "2", 2),
             new Card(Suit.DIAMONDS, "3", 3),

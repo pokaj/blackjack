@@ -13,4 +13,12 @@ public class Player {
         handValue = hand.stream().map(Card::getValue).reduce(0, Integer::sum);
         return handValue;
     }
+
+    public void receiveCard(Card card){
+        this.hand.add(card);
+    }
+
+    public String getId(){
+        return this.id;
+    }
 }
