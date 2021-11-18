@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private List<Card> cards = List.of(
+    private List<Card> cards = Arrays.asList(
             // DIAMONDS
             new Card(Suit.DIAMONDS, "2", 2),
             new Card(Suit.DIAMONDS, "3", 3),
@@ -33,13 +34,39 @@ public class Deck {
             new Card(Suit.SPADES, "K", 10),
             new Card(Suit.SPADES, "Q", 10),
             new Card(Suit.SPADES, "J", 10),
-            new Card(Suit.SPADES, "A", 10),
-    );
+            new Card(Suit.SPADES, "A", 11),
 
-//    public Deck(List<Card> cards) {
-//        List.of(new Card(Suit.HEARTS, "2", 2));
-//        this.cards = cards;
-//    }
+            // CLUBS
+            new Card(Suit.CLUBS, "2", 2),
+            new Card(Suit.CLUBS, "3", 3),
+            new Card(Suit.CLUBS, "4", 4),
+            new Card(Suit.CLUBS, "5", 5),
+            new Card(Suit.CLUBS, "6", 6),
+            new Card(Suit.CLUBS, "7", 7),
+            new Card(Suit.CLUBS, "8", 8),
+            new Card(Suit.CLUBS, "9", 9),
+            new Card(Suit.CLUBS, "10", 10),
+            new Card(Suit.CLUBS, "K", 10),
+            new Card(Suit.CLUBS, "Q", 10),
+            new Card(Suit.CLUBS, "J", 10),
+            new Card(Suit.CLUBS, "A", 11),
+
+            // HEARTS
+            new Card(Suit.HEARTS, "2", 2),
+            new Card(Suit.HEARTS, "3", 3),
+            new Card(Suit.HEARTS, "4", 4),
+            new Card(Suit.HEARTS, "5", 5),
+            new Card(Suit.HEARTS, "6", 6),
+            new Card(Suit.HEARTS, "7", 7),
+            new Card(Suit.HEARTS, "8", 8),
+            new Card(Suit.HEARTS, "9", 9),
+            new Card(Suit.HEARTS, "10", 10),
+            new Card(Suit.HEARTS, "K", 10),
+            new Card(Suit.HEARTS, "Q", 10),
+            new Card(Suit.HEARTS, "J", 10),
+            new Card(Suit.HEARTS, "A", 11)
+
+    );
 
     public void shuffle() {
         Collections.shuffle(cards);
