@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 public class Game {
-    Set<Player> players = new HashSet<>();
+    List<Player> players = new ArrayList<>();
     Deck deck;
     Boolean foundWinner = false;
 
-    public Game(Set<Player> players, Deck deck){
+    public Game(List<Player> players, Deck deck){
         this.players = players;
         this.deck = deck;
         deck.shuffle();
@@ -22,6 +22,8 @@ public class Game {
             for(int i = 0; i < 2; i++){
                 Card card = this.deck.draw();
                 player.receiveCard(card);
+
+
                 System.out.println("Player with the id of " + player.getId() + " was given the card: ");
                 System.out.println("Suit: " + card.getSuit() + ", Rank: " + card.getRank() + ", Value: " + card.getValue());
                 System.out.println("\n");
@@ -41,18 +43,21 @@ public class Game {
                 if(player.showHand() < 17){
                     Card card = this.deck.draw();
                     player.receiveCard(card);
-                    System.out.println("Player with the id of " + player.getId() + " was given another card: ");
+                    System.out.println("Player with the id of " + player.getId() + " was hit with another card: ");
                     System.out.println("Suit: " + card.getSuit() + ", Rank: " + card.getRank() + ", Value: " + card.getValue());
-                    players.add(player);
-                }else if(player.showHand() == 17 || player.showHand() > 17){
+                }
+                else if(player.showHand() == 17 || player.showHand() > 17 && player.showHand() < 21){
                     stickList.add(player);
                     System.out.println("Player with the id of " + player.getId() + " stuck");
                     players.remove(player);
-                }else if(player.showHand() > 21){
-                    players.remove(player);
+                    System.out.println(players.size());
+                    System.out.println(stickList.size());
                 }else if(player.showHand() == 21){
                     System.out.println("The player with the ID of " + player.getId() + " won the game");
                     break;
+                }if(player.showHand() > 21){
+                    players.remove(player);
+                    System.out.println("Player with the ID of " + player.getId() + " was ejected!!");
                 }
             }
         }
@@ -76,3 +81,6 @@ public class Game {
 //2 = (4 + 6) = 10  || + 9 = 19 ||  => stick
 //3 = (2 + 7) = 9   || + 8 = 17 ||  =>  stick
 
+//1 = (2 + 3) = 5 || + 6 = 11 || + 5 = 16
+//2 = (4 + 2) = 6 || + 10 = 16 || + 10 = 26
+//3 = (10 + 4) = 14 || + 6 = 20 ||

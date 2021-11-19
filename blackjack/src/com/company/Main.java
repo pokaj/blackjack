@@ -1,6 +1,8 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -13,7 +15,7 @@ public class Main {
         Player player2 = new Player("p2");
         Player player3 = new Player("p3");
 
-        Set<Player> players = new HashSet<>();
+        List<Player> players = new ArrayList<>();
         players.add(player1);
         players.add(player2);
         players.add(player3);
@@ -22,7 +24,7 @@ public class Main {
 
         freshGame.assignCards();
 
-//        freshGame.playGame();
+        freshGame.playGame();
 
     }
 }
