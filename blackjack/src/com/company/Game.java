@@ -1,10 +1,8 @@
 package com.company;
 import com.sun.source.doctree.SeeTree;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game {
     List<Player> players = new ArrayList<>();
@@ -38,26 +36,39 @@ public class Game {
 
     public void playGame(){
         List<Player> stickList = new ArrayList<>();
-        while (!players.isEmpty()){
-            for (Player player: players) {
+        Boolean isEmpty = players.isEmpty();
+        while (!isEmpty){
+            Iterator<Player> loopPlayers = players.iterator();
+
+            while (loopPlayers.hasNext()) {
+                Player player = loopPlayers.next();
                 if(player.showHand() < 17){
                     Card card = this.deck.draw();
                     player.receiveCard(card);
                     System.out.println("Player with the id of " + player.getId() + " was hit with another card: ");
                     System.out.println("Suit: " + card.getSuit() + ", Rank: " + card.getRank() + ", Value: " + card.getValue());
-                }
-                else if(player.showHand() == 17 || player.showHand() > 17 && player.showHand() < 21){
+                }else if(player.showHand() > 21){
+                    System.out.println("Player with the ID of " + player.getId() + " was ejected!!");
+                    players.remove(player);
+                    loopPlayers = players.iterator();
+                    isEmpty = players.isEmpty();
+                    System.out.println("initial list size now ");
+                    System.out.println(players.size());
+                }else if(player.showHand() == 21){
+                    System.out.println("The player with the ID of " + player.getId() + " won the game");
+                    stickList.clear();
+                    isEmpty = true;
+                    break;
+                }else if(player.showHand() >= 17 && player.showHand() < 21 && player.showHand() != 21){
                     stickList.add(player);
                     System.out.println("Player with the id of " + player.getId() + " stuck");
                     players.remove(player);
+                    loopPlayers = players.iterator();
+                    isEmpty = players.isEmpty();
+                    System.out.println("initial list size now ");
                     System.out.println(players.size());
+                    System.out.println("\nsticklist size now");
                     System.out.println(stickList.size());
-                }else if(player.showHand() == 21){
-                    System.out.println("The player with the ID of " + player.getId() + " won the game");
-                    break;
-                }if(player.showHand() > 21){
-                    players.remove(player);
-                    System.out.println("Player with the ID of " + player.getId() + " was ejected!!");
                 }
             }
         }
@@ -65,9 +76,15 @@ public class Game {
         int highest = 0;
         if(!stickList.isEmpty()){
             highest = stickList.stream().map(Player::showHand).mapToInt(value -> value).max().orElse(0);
-            for (Player player: stickList) {
-                if(player.showHand() == highest){
-                    System.out.println("The player with the ID of " + player.getId() + " won the game");
+
+            if (highest == 0) {
+                System.out.println("There was a draw");
+            }
+            else {
+                for (Player player: stickList) {
+                    if(player.showHand() == highest){
+                        System.out.println("The player with the ID of " + player.getId() + " won the game");
+                    }
                 }
             }
         }
