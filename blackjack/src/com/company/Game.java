@@ -41,11 +41,12 @@ public class Game {
                 if(player.showHand() < 17){
                     Card card = this.deck.draw();
                     player.receiveCard(card);
-                    System.out.println("Player with the id of " + player.getId() + " was given the card: ");
+                    System.out.println("Player with the id of " + player.getId() + " was given another card: ");
                     System.out.println("Suit: " + card.getSuit() + ", Rank: " + card.getRank() + ", Value: " + card.getValue());
                     players.add(player);
                 }else if(player.showHand() == 17 || player.showHand() > 17){
                     stickList.add(player);
+                    System.out.println("Player with the id of " + player.getId() + " stuck");
                     players.remove(player);
                 }else if(player.showHand() > 21){
                     players.remove(player);
@@ -58,10 +59,10 @@ public class Game {
 
         int highest = 0;
         if(!stickList.isEmpty()){
-            highest = stickList.stream().mapToInt(player -> player.showHand()).max()
+            highest = stickList.stream().map(Player::showHand).mapToInt(value -> value).max().orElse(0);
             for (Player player: stickList) {
-                if(player.showHand() > highest){
-                    highest = player.showHand();
+                if(player.showHand() == highest){
+                    System.out.println("The player with the ID of " + player.getId() + " won the game");
                 }
             }
         }
