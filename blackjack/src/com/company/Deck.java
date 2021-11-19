@@ -1,13 +1,17 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Deck {
-    private final List<Card> cards = Arrays.asList(
+    private Stack<Card> cards = new Stack<>();
+    private String snapShotOfListOfCards;
+    public Deck() {
+        storeCards();
+        this.snapShotOfListOfCards = cards.stream().collect(Collectors.toList()).toString();
+    }
+
+    private List<Card> listOfCards = Arrays.asList(
             // DIAMONDS
             new Card(Suit.DIAMONDS, "2", 2),
             new Card(Suit.DIAMONDS, "3", 3),
@@ -67,17 +71,26 @@ public class Deck {
             new Card(Suit.HEARTS, "Q", 10),
             new Card(Suit.HEARTS, "J", 10),
             new Card(Suit.HEARTS, "A", 11)
-
     );
+
+    public void storeCards() {
+        for(int i = 0; i < listOfCards.size(); i++) {
+            cards.push(listOfCards.get(i));
+        }
+    }
 
     public void shuffle() {
         Collections.shuffle(cards);
+        this.snapShotOfListOfCards = cards.stream().collect(Collectors.toList()).toString();
     }
 
     public Card draw () {
-        Card card = cards.get(cards.size() - 1);
-        cards.remove(cards.size() - 1);
+        Card card = cards.pop();
         return card;
+    }
+
+    public String getSnapShotOfListOfCards() {
+        return snapShotOfListOfCards;
     }
 }
 

@@ -10,6 +10,10 @@ public class Player {
     private List<Card> hand = new ArrayList<>();
     private int handValue;
 
+    public Player(String id) {
+        this.id = id;
+    }
+
     public int showHand () {
         handValue = hand.stream().map(Card::getValue).reduce(0, Integer::sum);
         return handValue;

@@ -25,8 +25,6 @@ public class Game {
         }
     }
 
-
-
     public void playGame(){
         List<Player> stickList = new ArrayList<>();
         while (!players.isEmpty()){
@@ -45,7 +43,6 @@ public class Game {
                 }
             }
         }
-
 
     }
 }
