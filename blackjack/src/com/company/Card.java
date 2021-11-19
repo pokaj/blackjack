@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Stack;
 
 public class Card {
+
     private Suit suit;
     private final String rank;
     private final int value;
@@ -26,4 +27,6 @@ public class Card {
     public int getValue() {
         return value;
     }
+
+    public String  getSuit() {return suit.toString();}
 }
